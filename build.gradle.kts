@@ -31,6 +31,12 @@ dependencies {
 	implementation("com.mysql:mysql-connector-j")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
+	testImplementation("org.junit.jupiter:junit-jupiter-api")
+	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+	testImplementation("org.mockito:mockito-core:5.12.0")
+	testImplementation("org.mockito:mockito-inline:5.1.0")
+
+
 }
 
 kotlin {
@@ -42,4 +48,9 @@ kotlin {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+	jvmArgs("-XX:+EnableDynamicAgentLoading")
+	jvmArgs ("-Xshare:off") // JVM 아규먼트 설정
+	filter {
+		includeTestsMatching("com.example.SpringKotlinWebProject.*")
+	}
 }

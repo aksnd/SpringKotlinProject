@@ -5,8 +5,8 @@ import org.springframework.boot.runApplication
 
 
 @SpringBootApplication
-class SpringKotlinWebProjectApplication
+class SbbApplication
 
 fun main(args: Array<String>) {
-	runApplication<SpringKotlinWebProjectApplication>(*args)
+	runApplication<SbbApplication>(*args)
 }
