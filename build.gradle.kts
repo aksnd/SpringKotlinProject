@@ -35,6 +35,7 @@ dependencies {
 	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 	testImplementation("org.mockito:mockito-core:5.12.0")
 	testImplementation("org.mockito:mockito-inline:5.1.0")
+	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 
 
 }

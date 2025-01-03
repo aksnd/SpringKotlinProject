@@ -23,7 +23,7 @@ class SbbApplicationTests {
     @Autowired
     lateinit var AnswerRepository: AnswerRepository
 
-    @Transactional
+    //@Transactional rollback 기능이 있어 삽입에는 적합하지 않음.
     @Test
     fun testJpa() {
         val q1 = Question(
