@@ -25,7 +25,7 @@ class SbbApplicationTests {
 
     @Transactional
     @Test
-    /*fun testJpa() {
+    fun testJpa() {
         val q1 = Question(
             subject = "sbb가 무엇인가요?",
             content = "sbb에 대해서 알고 싶습니다.",
@@ -39,7 +39,7 @@ class SbbApplicationTests {
             createDate = LocalDateTime.now()
         )
         questionRepository.save(q2) // 두 번째 질문 저장
-    }*/ // 저장 (save method)
+    } // 저장 (save method)
 
     /*fun testJpa() {
         val all: List<Question> = questionRepository.findAll()
