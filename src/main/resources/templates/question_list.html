@@ -15,8 +15,9 @@
     </thead>
     <tbody>
     <tr th:each="question : ${questionList}">
-        <td th:text="${question.subject}">제목 예제</td>
-        <td th:text="${question.createDate}">2024-01-03</td>
+        <td>
+            <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
+        </td>
     </tr>
     </tbody>
 </table>
