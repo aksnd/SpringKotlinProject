@@ -36,6 +36,8 @@ dependencies {
 	testImplementation("org.mockito:mockito-core:5.12.0")
 	testImplementation("org.mockito:mockito-inline:5.1.0")
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+	implementation ("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.1.0")
+	implementation ("org.springframework.boot:spring-boot-starter-validation")
 
 
 }
