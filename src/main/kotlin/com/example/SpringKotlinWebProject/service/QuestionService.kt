@@ -3,6 +3,9 @@ package com.example.SpringKotlinWebProject.service
 import com.example.SpringKotlinWebProject.model.Question
 import com.example.SpringKotlinWebProject.others.DataNotFoundException
 import com.example.SpringKotlinWebProject.repository.QuestionRepository
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 import java.util.*
@@ -11,8 +14,9 @@ import java.util.*
 @Service
 class QuestionService(private val questionRepository: QuestionRepository) {
 
-    fun getList(): List<Question> {
-        return questionRepository.findAll()
+    fun getList(page: Int): Page<Question> {
+        val pageable = PageRequest.of(page, 10, Sort.by(Sort.Direction.DESC, "id"))
+        return questionRepository.findAll(pageable)
     }
 
     fun getQuestion(id: Int): Question {

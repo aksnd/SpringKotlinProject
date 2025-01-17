@@ -1,12 +1,8 @@
 package com.example.SpringKotlinWebProject
 
-import com.example.SpringKotlinWebProject.model.Answer
-import org.junit.jupiter.api.Assertions.assertEquals
-import com.example.SpringKotlinWebProject.repository.QuestionRepository
 import com.example.SpringKotlinWebProject.model.Question
 import com.example.SpringKotlinWebProject.repository.AnswerRepository
-import jakarta.transaction.Transactional
-import org.junit.jupiter.api.Assertions.assertTrue
+import com.example.SpringKotlinWebProject.repository.QuestionRepository
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -26,6 +22,18 @@ class SbbApplicationTests {
     //@Transactional rollback 기능이 있어 삽입에는 적합하지 않음.
     @Test
     fun testJpa() {
+        for (i in 1..300) {
+            val q = Question(
+                subject = "테스트 데이터입니다:[%03d]".format(i),
+                content = "내용무",
+                createDate = LocalDateTime.now()
+            )
+            questionRepository.save(q)
+        }
+    }
+
+
+    /*fun testJpa() {
         val q1 = Question(
             subject = "sbb가 무엇인가요?",
             content = "sbb에 대해서 알고 싶습니다.",
@@ -39,7 +47,7 @@ class SbbApplicationTests {
             createDate = LocalDateTime.now()
         )
         questionRepository.save(q2) // 두 번째 질문 저장
-    } // 저장 (save method)
+    } // 저장 (save method)*/
 
     /*fun testJpa() {
         val all: List<Question> = questionRepository.findAll()

@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.*
 class QuestionController(private val questionService: QuestionService) {
 
     @GetMapping("/list")
-    fun list(model: Model): String {
-        val questionList = questionService.getList()
-        model.addAttribute("questionList", questionList)
+    fun list(model: Model, @RequestParam(value = "page", defaultValue = "0") page: Int): String {
+        val paging = questionService.getList(page)
+        model.addAttribute("paging", paging)
         return "question_list"
     }
 
