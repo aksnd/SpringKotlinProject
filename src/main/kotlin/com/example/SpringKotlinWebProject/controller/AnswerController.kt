@@ -1,6 +1,7 @@
 package com.example.SpringKotlinWebProject.controller
 
 import com.example.SpringKotlinWebProject.Form.AnswerForm
+import com.example.SpringKotlinWebProject.model.Answer
 import com.example.SpringKotlinWebProject.model.Question
 import com.example.SpringKotlinWebProject.model.SiteUser
 import com.example.SpringKotlinWebProject.service.AnswerService
@@ -44,8 +45,8 @@ class AnswerController(
             return "question_detail"
         }
 
-        answerService.create(question, answerForm.content, siteuser)
-        return String.format("redirect:/question/detail/%s", id)
+        val answer: Answer = answerService.create(question, answerForm.content, siteuser)
+        return "redirect:/question/detail/${answer.question!!.id}#answer_${answer.id}"
     }
 
     @PreAuthorize("isAuthenticated()")
@@ -57,7 +58,7 @@ class AnswerController(
     ): String {
         val answer = answerService.getAnswer(id)
 
-        if (answer.author.username != principal.name) {
+        if (answer.author!!.username != principal.name) {
             throw ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.")
         }
 
@@ -80,7 +81,7 @@ class AnswerController(
 
         val answer = answerService.getAnswer(id)
 
-        if (answer.author.username != principal.name) {
+        if (answer.author!!.username != principal.name) {
             throw ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.")
         }
 
@@ -97,7 +98,7 @@ class AnswerController(
     ): String {
         val answer = answerService.getAnswer(id)
 
-        if (answer.author.username != principal.name) {
+        if (answer.author!!.username != principal.name) {
             throw ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제권한이 없습니다.")
         }
 

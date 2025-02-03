@@ -27,9 +27,11 @@ class QuestionController(
 ) {
 
     @GetMapping("/list")
-    fun list(model: Model, @RequestParam(value = "page", defaultValue = "0") page: Int): String {
-        val paging = questionService.getList(page)
+    fun list(model: Model, @RequestParam(value = "page", defaultValue = "0") page: Int,
+             @RequestParam(value = "kw", defaultValue = "") kw:String): String {
+        val paging = questionService.getList(page, kw)
         model.addAttribute("paging", paging)
+        model.addAttribute("kw", kw)
         return "question_list"
     }
 
@@ -130,6 +132,20 @@ class QuestionController(
         questionService.delete(question)
 
         return "redirect:/"
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/vote/{id}")
+    fun questionVote(
+        principal: Principal,
+        @PathVariable("id") id: Int
+    ): String {
+        val question = questionService.getQuestion(id)
+        val siteUser = userService.getUser(principal.name)
+
+        questionService.vote(question, siteUser)
+
+        return "redirect:/question/detail/$id"
     }
 
 }

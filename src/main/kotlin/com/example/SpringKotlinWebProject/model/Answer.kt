@@ -18,7 +18,10 @@ class Answer(
     var modifyDate: LocalDateTime = LocalDateTime.now(),
 
     @ManyToOne
-    var author: SiteUser,
+    var author: SiteUser?,
+
+    @ManyToMany
+    var voter: Set<SiteUser>,
 
     @ManyToOne
     var question: Question? = null

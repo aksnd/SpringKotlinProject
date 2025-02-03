@@ -12,14 +12,16 @@ import java.util.*
 
 @Service
 class AnswerService(private val answerRepository: AnswerRepository)  {
-    fun create(question: Question, content: String, user: SiteUser) {
+    fun create(question: Question, content: String, user: SiteUser): Answer {
         val answer = Answer(
             question = question,
             content = content,
             createDate = LocalDateTime.now(),
             author = user,
+            voter = mutableSetOf()
         )
         answerRepository.save(answer)
+        return answer
     }
 
     fun getAnswer(id: Int): Answer {

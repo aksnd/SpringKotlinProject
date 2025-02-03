@@ -23,6 +23,8 @@ class Question(
     @ManyToOne
     var author: SiteUser?,
 
+    @ManyToMany
+    var voter: Set<SiteUser>,
 
 
     @OneToMany(mappedBy = "question", cascade = [CascadeType.REMOVE])
