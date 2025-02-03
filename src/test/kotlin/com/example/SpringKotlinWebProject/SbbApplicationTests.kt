@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import java.time.LocalDateTime
-import java.util.*
 
 //@SpringBootTest
 @SpringBootTest(classes = [SbbApplication::class])
@@ -26,7 +25,8 @@ class SbbApplicationTests {
             val q = Question(
                 subject = "테스트 데이터입니다:[%03d]".format(i),
                 content = "내용무",
-                createDate = LocalDateTime.now()
+                createDate = LocalDateTime.now(),
+                author = null,
             )
             questionRepository.save(q)
         }

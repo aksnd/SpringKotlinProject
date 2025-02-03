@@ -1,6 +1,7 @@
 package com.example.SpringKotlinWebProject.service
 
 import com.example.SpringKotlinWebProject.model.Question
+import com.example.SpringKotlinWebProject.model.SiteUser
 import com.example.SpringKotlinWebProject.others.DataNotFoundException
 import com.example.SpringKotlinWebProject.repository.QuestionRepository
 import org.springframework.data.domain.Page;
@@ -28,12 +29,24 @@ class QuestionService(private val questionRepository: QuestionRepository) {
         }
     }
 
-    fun create(subject: String, content: String) {
+    fun create(subject: String, content: String, user:SiteUser) {
         val question = Question(
             subject = subject,
             content = content,
-            createDate = LocalDateTime.now()
+            createDate = LocalDateTime.now(),
+            author = user,
         )
         questionRepository.save(question)
+    }
+    fun modify(subject: String, content: String, question:Question){
+        question.subject = subject
+        question.content = content
+        question.modifyDate = LocalDateTime.now()
+
+        questionRepository.save(question)
+    }
+
+    fun delete(question: Question) {
+        questionRepository.delete(question)
     }
 }

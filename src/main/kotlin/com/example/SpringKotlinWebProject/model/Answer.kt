@@ -15,6 +15,11 @@ class Answer(
 
     var createDate: LocalDateTime = LocalDateTime.now(),
 
+    var modifyDate: LocalDateTime = LocalDateTime.now(),
+
+    @ManyToOne
+    var author: SiteUser,
+
     @ManyToOne
     var question: Question? = null
 )

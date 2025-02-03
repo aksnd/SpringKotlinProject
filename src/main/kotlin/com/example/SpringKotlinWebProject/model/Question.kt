@@ -18,6 +18,13 @@ class Question(
 
     var createDate: LocalDateTime = LocalDateTime.now(),
 
+    var modifyDate: LocalDateTime = LocalDateTime.now(),
+
+    @ManyToOne
+    var author: SiteUser?,
+
+
+
     @OneToMany(mappedBy = "question", cascade = [CascadeType.REMOVE])
     var answerList: List<Answer> = mutableListOf()
 )
